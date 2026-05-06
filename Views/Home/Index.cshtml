@@ -1,8 +1,62 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Главная";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- HERO -->
+<div class="bg-red-500 rounded-3xl p-10 flex items-center justify-between text-white">
+
+    <!-- Текст -->
+    <div class="max-w-lg">
+        <h1 class="text-4xl font-bold mb-4">
+            Найди своего друга
+        </h1>
+
+        <p class="mb-6 text-lg">
+            Помоги животным из приюта найти любящую семью
+        </p>
+
+        <a href="/Animal"
+           class="bg-white text-black px-6 py-3 rounded-xl font-semibold">
+            Смотреть каталог
+        </a>
+    </div>
+
+    <!-- Картинка -->
+    <img src="/images/dog.png"
+         class="w-80"
+         alt="Собака" />
+</div>
+
+
+<!-- О ПРИЮТЕ -->
+<div class="mt-10 grid grid-cols-2 gap-6">
+
+    <div class="bg-red-700 text-white p-6 rounded-2xl">
+        <h2 class="text-2xl font-bold mb-2">О приюте</h2>
+        <p>
+            Наш приют помогает бездомным собакам найти любящих хозяев.
+            Мы заботимся о животных и ищем для них новый дом.
+        </p>
+    </div>
+
+    <div>
+        <h2 class="text-xl font-semibold mb-4">
+            Почему нужно взять животное из приюта?
+        </h2>
+
+        <div class="space-y-2">
+            <div class="bg-gray-200 rounded-full px-4 py-2">
+                спасаете жизнь животного
+            </div>
+
+            <div class="bg-gray-200 rounded-full px-4 py-2">
+                получаете верного друга
+            </div>
+
+            <div class="bg-gray-200 rounded-full px-4 py-2">
+                помогаете приюту
+            </div>
+        </div>
+    </div>
+
 </div>
