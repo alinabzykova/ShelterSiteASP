@@ -35,5 +35,7 @@ namespace ShelterSiteNET.Models
         public List<string> Images { get; set; } = new List<string>();
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        public int UserId { get; set; }
     }
 }

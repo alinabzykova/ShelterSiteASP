@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShelterSiteNET.Models
 {
@@ -15,6 +16,10 @@ namespace ShelterSiteNET.Models
         public string Password { get; set; } = "";
 
         [StringLength(200)]
-        public string? Description { get; set; } = "Любитель животных 🐶";
+        public string? Description { get; set; } = "Любитель животных ";
+
+        [NotMapped]
+        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
+        public string? ConfirmPassword { get; set; }
     }
 }
