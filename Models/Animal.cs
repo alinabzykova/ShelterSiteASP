@@ -25,9 +25,9 @@ namespace ShelterSiteNET.Models
         [Required]
         public string Gender { get; set; } = "Не указан";
 
-        public string Size { get; set; } = "Medium";
+        public string Size { get; set; } = "Средний";
 
-        public string Status { get; set; } = "Available";
+        public string Status { get; set; } = "Доступен"; //может булевый оператор подойдет?
 
         public string Description { get; set; } =
             "Питомец ищет друга!";
