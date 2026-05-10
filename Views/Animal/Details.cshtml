@@ -1,0 +1,54 @@
+﻿@model ShelterSiteNET.Models.Animal
+
+@{
+    ViewData["Title"] = "Информация о животном";
+}
+
+<div class="bg-white rounded-3xl shadow p-8">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- Фото -->
+        <div>
+            <img src="@Model.Images[0]"
+                 class="w-full rounded-2xl"
+                 alt="@Model.Name" />
+        </div>
+
+        <!-- Информация -->
+        <div>
+
+            <h1 class="text-4xl font-bold mb-4">
+                @Model.Name
+            </h1>
+
+            <p class="text-lg mb-2">
+                <span class="font-semibold">Возраст:</span>
+                @Model.Age
+            </p>
+
+            <p class="text-lg mb-2">
+                <span class="font-semibold">Порода:</span>
+                @Model.Breed
+            </p>
+
+            <p class="text-lg mb-2">
+                <span class="font-semibold">Размер:</span>
+                @Model.Size
+            </p>
+
+            <p class="text-lg mb-6">
+                <span class="font-semibold">Описание:</span>
+                @Model.Description
+            </p>
+
+            <!-- Кнопка -->
+            <button class="bg-red-500 text-white px-6 py-3 rounded-xl">
+                Добавить в избранное 
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
