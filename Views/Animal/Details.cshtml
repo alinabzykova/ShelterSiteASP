@@ -8,14 +8,13 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-        <!-- Фото -->
         <div>
             <img src="@Model.Images[0]"
                  class="w-full rounded-2xl"
                  alt="@Model.Name" />
         </div>
 
-        <!-- Информация -->
+
         <div>
 
             <h1 class="text-4xl font-bold mb-4">
@@ -42,10 +41,15 @@
                 @Model.Description
             </p>
 
-            <!-- Кнопка -->
+        
             <button class="bg-red-500 text-white px-6 py-3 rounded-xl">
                 Добавить в избранное 
             </button>
+
+            <a href="/Animal/Edit/@Model.Id"
+               class="bg-gray-500 text-white px-6 py-3 rounded-xl ml-2">
+                Редактировать
+            </a>
 
         </div>
 

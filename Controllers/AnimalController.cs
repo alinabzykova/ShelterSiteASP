@@ -137,5 +137,19 @@ namespace ShelterSiteNET.Controllers
         {
             return View();
         }
+
+        public IActionResult Edit(int id)
+        {
+            var animal = new Animal
+            {
+                Id = id,
+                Name = "Бобик",
+                Age = 3,
+                Breed = "Лабрадор",
+                Description = "Очень дружелюбный пёс."
+            };
+
+            return View(animal);
+        }
     }
 }
