@@ -1,0 +1,46 @@
+﻿@model List<ShelterSiteNET.Models.Animal>
+
+@{
+    ViewData["Title"] = "Каталог";
+}
+
+<a href="/Animal/Create"
+   class="bg-red-500 text-white px-4 py-2 rounded-lg">
+    Добавить животное
+</a>
+
+<h1 class="text-3xl font-bold mb-8">
+    Каталог животных 
+</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    @foreach (var animal in Model)
+    {
+        <div class="bg-white rounded-2xl shadow p-4">
+
+            <img src="@animal.Images[0]"
+                 class="w-full h-64 object-cover rounded-xl mb-4"
+                 alt="@animal.Name" />
+
+            <h2 class="text-2xl font-bold">
+                @animal.Name
+            </h2>
+
+            <p class="text-gray-600">
+                Возраст: @animal.Age
+            </p>
+
+            <p class="text-gray-600 mb-4">
+                Порода: @animal.Breed
+            </p>
+
+            <a href="/Animal/Details/@animal.Id"
+               class="bg-red-500 text-white px-4 py-2 rounded-lg">
+                Подробнее
+            </a>
+
+        </div>
+    }
+
+</div>

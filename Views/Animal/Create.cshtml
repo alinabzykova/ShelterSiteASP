@@ -1,0 +1,57 @@
+﻿@model ShelterSiteNET.Models.Animal
+
+@{
+    ViewData["Title"] = "Добавление животного";
+}
+
+<h1 class="text-3xl font-bold mb-6">
+    Добавить животное 
+</h1>
+
+<form class="bg-white p-6 rounded-2xl shadow space-y-4">
+
+    <!-- Имя -->
+    <div>
+        <label class="block mb-1 font-semibold">Имя</label>
+
+        <input asp-for="Name"
+               class="w-full border rounded-lg p-2" />
+
+        <span asp-validation-for="Name"
+              class="text-red-500"></span>
+    </div>
+
+    <!-- Возраст -->
+    <div>
+        <label class="block mb-1 font-semibold">Возраст</label>
+
+        <input asp-for="Age"
+               class="w-full border rounded-lg p-2" />
+
+        <span asp-validation-for="Age"
+              class="text-red-500"></span>
+    </div>
+
+    <!-- Порода -->
+    <div>
+        <label class="block mb-1 font-semibold">Порода</label>
+
+        <input asp-for="Breed"
+               class="w-full border rounded-lg p-2" />
+    </div>
+
+    <!-- Описание -->
+    <div>
+        <label class="block mb-1 font-semibold">Описание</label>
+
+        <textarea asp-for="Description"
+                  class="w-full border rounded-lg p-2">
+        </textarea>
+    </div>
+
+    <!-- Кнопка -->
+    <button class="bg-red-500 text-white px-6 py-3 rounded-xl">
+        Сохранить
+    </button>
+
+</form>
