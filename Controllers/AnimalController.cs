@@ -1,135 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShelterSiteNET.Models;
 using System.Linq;
+using ShelterSiteNET.Models;
+using ShelterSiteASP.Data;
 
 namespace ShelterSiteNET.Controllers
 {
     public class AnimalController : Controller
-    {
+    {   private readonly AnimalRepository _animalRepo;
+
+        public AnimalController(AnimalRepository animalRepo)
+        {
+            _animalRepo = animalRepo;
+        }
+
         public IActionResult Index()
         {
-            var animals = new List<Animal>
-            {
-                new Animal
-                {
-                    Id = 1,
-                    Name = "Бобик",
-                    Age = 4,
-                    Breed = "Лабрадор",
-                    Size = "Большой",
-                    Images = new List<string>
-                    {
-                        "/images/dogs/Бобик 1.jpg"
-                    }
-                },
-
-                new Animal
-                {
-                    Id = 2,
-                    Name = "Джек",
-                    Age = 5,
-                    Breed = "Корги",
-                    Size = "Большой",
-                    Images = new List<string>
-                    {
-                        "/images/dogs/Джек 1.jpg"
-                    }
-                },
-
-                new Animal
-                {
-                    Id = 3,
-                    Name = "Лайка",
-                    Age = 5,
-                    Breed = "Корги",
-                    Size = "Средний",
-                    Images = new List<string>
-                    {
-                        "/images/dogs/Лайка 1.jpg"
-                    }
-                },
-
-                new Animal
-                {
-                    Id = 3,
-                    Name = "Тузик",
-                    Age = 5,
-                    Breed = "Корги",
-                    Size = "Средний",
-                    Images = new List<string>
-                    {
-                        "/images/dogs/Тузик 1.jpg"
-                    }
-                }
-            };
-
+            var animals = _animalRepo.GetAll();
             return View(animals);
         }
 
         public IActionResult Details(int id)
         {
-            var animals = new List<Animal>
-            {
-                new Animal
-                {
-                    Id = 1,
-                    Name = "Бобик",
-                    Age = 4,
-                    Breed = "Лабрадор",
-                    Size = "Большой",
-                    Images = new List<string>
-                    {
-                        "/images/dogs/Бобик 1.jpg"
-                    }
-                },
-
-                new Animal
-                {
-                    Id = 2,
-                    Name = "Джек",
-                    Age = 5,
-                    Breed = "Корги",
-                    Size = "Большой",
-                    Images = new List<string>
-                    {
-                        "/images/dogs/Джек 1.jpg"
-                    }
-                },
-
-                new Animal
-                {
-                    Id = 3,
-                    Name = "Лайка",
-                    Age = 5,
-                    Breed = "Корги",
-                    Size = "Средний",
-                    Images = new List<string>
-                    {
-                        "/images/dogs/Лайка 1.jpg"
-                    }
-                },
-
-                new Animal
-                {
-                    Id = 3,
-                    Name = "Тузик",
-                    Age = 5,
-                    Breed = "Корги",
-                    Size = "Средний",
-                    Images = new List<string>
-                    {
-                        "/images/dogs/Тузик 1.jpg"
-                    }
-                }
-            };
-
-            var animal = animals.FirstOrDefault(a => a.Id == id);
-
+            var animal = _animalRepo.GetById(id);
             if (animal == null)
-            {
                 return NotFound();
-            }
-
             return View(animal);
         }
 
@@ -138,18 +33,40 @@ namespace ShelterSiteNET.Controllers
             return View();
         }
 
-        public IActionResult Edit(int id)
+        [HttpPost]
+        public IActionResult Create(Animal animal)
         {
-            var animal = new Animal
+            if (ModelState.IsValid)
             {
-                Id = id,
-                Name = "Бобик",
-                Age = 3,
-                Breed = "Лабрадор",
-                Description = "Очень дружелюбный пёс."
-            };
-
+                _animalRepo.Add(animal);
+                return RedirectToAction("Index");
+            }
             return View(animal);
         }
+
+        public IActionResult Edit(int id)
+        {
+            var animal = _animalRepo.GetById(id);
+            if (animal == null)
+                return NotFound();
+            return View(animal);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Animal animal)
+        {
+            if (ModelState.IsValid)
+            {
+                _animalRepo.Update(animal);
+                return RedirectToAction("Index");
+            }
+            return View(animal);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            _animalRepo.Delete(id);
+            return RedirectToAction("Index");
+        } 
     }
 }

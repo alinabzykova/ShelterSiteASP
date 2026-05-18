@@ -9,48 +9,56 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
         <div>
-            <img src="@Model.Images[0]"
-                 class="w-full rounded-2xl"
+            <img src="@(Model.Images != null && Model.Images.Any() ? Model.Images[0] : "/images/paw.png")"
+                 class="w-full rounded-2xl object-cover"
+                 style="max-height: 400px;"
                  alt="@Model.Name" />
         </div>
 
-
         <div>
-
-            <h1 class="text-4xl font-bold mb-4">
-                @Model.Name
-            </h1>
+            <h1 class="text-4xl font-bold mb-4">@Model.Name</h1>
 
             <p class="text-lg mb-2">
-                <span class="font-semibold">Возраст:</span>
-                @Model.Age
+                <span class="font-semibold">Возраст:</span> @Model.Age
             </p>
 
             <p class="text-lg mb-2">
-                <span class="font-semibold">Порода:</span>
-                @Model.Breed
+                <span class="font-semibold">Тип:</span> @Model.Type
             </p>
 
             <p class="text-lg mb-2">
-                <span class="font-semibold">Размер:</span>
-                @Model.Size
+                <span class="font-semibold">Порода:</span> @Model.Breed
+            </p>
+
+            <p class="text-lg mb-2">
+                <span class="font-semibold">Пол:</span> @Model.Gender
+            </p>
+
+            <p class="text-lg mb-2">
+                <span class="font-semibold">Размер:</span> @Model.Size
+            </p>
+
+            <p class="text-lg mb-2">
+                <span class="font-semibold">Статус:</span>
+                <span class="@(Model.Status == "Доступен" ? "text-green-600" : "text-orange-600")">
+                    @Model.Status
+                </span>
             </p>
 
             <p class="text-lg mb-6">
-                <span class="font-semibold">Описание:</span>
-                @Model.Description
+                <span class="font-semibold">Описание:</span> @Model.Description
             </p>
 
-        
-            <button class="bg-red-500 text-white px-6 py-3 rounded-xl">
-                Добавить в избранное 
-            </button>
+            <div>
+                <button class="bg-red-500 text-white px-6 py-3 rounded-xl hover:bg-red-600">
+                    ❤️ Добавить в избранное
+                </button>
 
-            <a href="/Animal/Edit/@Model.Id"
-               class="bg-gray-500 text-white px-6 py-3 rounded-xl ml-2">
-                Редактировать
-            </a>
-
+                <a href="/Animal/Edit/@Model.Id"
+                   class="bg-gray-500 text-white px-6 py-3 rounded-xl ml-2 hover:bg-gray-600 inline-block">
+                    ✏️ Редактировать
+                </a>
+            </div>
         </div>
 
     </div>
