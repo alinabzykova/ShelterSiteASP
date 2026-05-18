@@ -4,14 +4,14 @@
     ViewData["Title"] = "Каталог";
 }
 
-<a href="/Animal/Create"
-   class="bg-red-500 text-white px-4 py-2 rounded-lg">
-    Добавить животное
-</a>
+<div class="mb-6">
+    <a href="/Animal/Create"
+       class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+        + Добавить животное
+    </a>
+</div>
 
-<h1 class="text-3xl font-bold mb-8">
-    Каталог животных 
-</h1>
+<h1 class="text-3xl font-bold mb-8">Каталог животных</h1>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
@@ -19,24 +19,16 @@
     {
         <div class="bg-white rounded-2xl shadow p-4">
 
-            <img src="@animal.Images[0]"
+            <img src="@(animal.Images != null && animal.Images.Any() ? animal.Images[0] : "/images/paw.png")"
                  class="w-full h-64 object-cover rounded-xl mb-4"
                  alt="@animal.Name" />
 
-            <h2 class="text-2xl font-bold">
-                @animal.Name
-            </h2>
-
-            <p class="text-gray-600">
-                Возраст: @animal.Age
-            </p>
-
-            <p class="text-gray-600 mb-4">
-                Порода: @animal.Breed
-            </p>
+            <h2 class="text-2xl font-bold">@animal.Name</h2>
+            <p class="text-gray-600">Возраст: @animal.Age</p>
+            <p class="text-gray-600 mb-4">Порода: @animal.Breed</p>
 
             <a href="/Animal/Details/@animal.Id"
-               class="bg-red-500 text-white px-4 py-2 rounded-lg">
+               class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 inline-block">
                 Подробнее
             </a>
 
@@ -44,3 +36,11 @@
     }
 
 </div>
+
+@if (!Model.Any())
+{
+    <div class="text-center text-gray-500 mt-10">
+        <p>Пока нет животных</p>
+        <a href="/Animal/Create" class="text-red-500">Добавить первого питомца</a>
+    </div>
+}

@@ -1,59 +1,94 @@
 ﻿@model ShelterSiteNET.Models.Animal
 
 @{
-    ViewData["Title"] = "Редактирование";
+    ViewData["Title"] = "Редактирование животного";
 }
 
 <h1 class="text-3xl font-bold mb-6">
-    Редактировать животное 
+    ✏️ Редактировать животное
 </h1>
 
-<form class="bg-white p-6 rounded-2xl shadow space-y-4">
-
-    <!-- имя -->
+<form method="post" asp-action="Edit" class="bg-white p-6 rounded-2xl shadow space-y-4">
+     
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="CreatedAt" />
+    <input type="hidden" asp-for="UserId" />
+     
     <div>
-        <label class="block mb-1 font-semibold">
-            Имя
-        </label>
-
-        <input asp-for="Name"
-               class="w-full border rounded-lg p-2" />
+        <label class="block mb-1 font-semibold">Имя</label>
+        <input asp-for="Name" class="w-full border rounded-lg p-2" />
+        <span asp-validation-for="Name" class="text-red-500"></span>
     </div>
-
-    <!-- возраст -->
+     
     <div>
-        <label class="block mb-1 font-semibold">
-            Возраст
-        </label>
-
-        <input asp-for="Age"
-               class="w-full border rounded-lg p-2" />
-    </div>
-
-    <!-- порода -->
+        <label class="block mb-1 font-semibold">Тип</label>
+        <select asp-for="Type" class="w-full border rounded-lg p-2">
+            <option value="Собака">🐕 Собака</option>
+            <option value="Кошка">🐱 Кошка</option>
+        </select>
+    </div> 
     <div>
-        <label class="block mb-1 font-semibold">
-            Порода
-        </label>
-
-        <input asp-for="Breed"
-               class="w-full border rounded-lg p-2" />
+        <label class="block mb-1 font-semibold">Возраст</label>
+        <input asp-for="Age" type="number" class="w-full border rounded-lg p-2" />
+        <span asp-validation-for="Age" class="text-red-500"></span>
     </div>
-
-    <!-- описание -->
+     
     <div>
-        <label class="block mb-1 font-semibold">
-            Описание
-        </label>
-
-        <textarea asp-for="Description"
-                  class="w-full border rounded-lg p-2">
-        </textarea>
+        <label class="block mb-1 font-semibold">Порода</label>
+        <input asp-for="Breed" class="w-full border rounded-lg p-2" />
+    </div> 
+    <div>
+        <label class="block mb-1 font-semibold">Пол</label>
+        <select asp-for="Gender" class="w-full border rounded-lg p-2">
+            <option value="Мальчик">Мальчик</option>
+            <option value="Девочка">Девочка</option>
+        </select>
     </div>
-
-    <!-- кнопка -->
-    <button class="bg-blue-500 text-white px-6 py-3 rounded-xl">
-        Сохранить изменения
-    </button>
+     
+    <div>
+        <label class="block mb-1 font-semibold">Размер</label>
+        <select asp-for="Size" class="w-full border rounded-lg p-2">
+            <option value="Маленький">Маленький</option>
+            <option value="Средний">Средний</option>
+            <option value="Большой">Большой</option>
+        </select>
+    </div>
+     
+    <div>
+        <label class="block mb-1 font-semibold">Статус</label>
+        <select asp-for="Status" class="w-full border rounded-lg p-2">
+            <option value="Доступен">Доступен</option>
+            <option value="Зарезервирован">Зарезервирован</option>
+            <option value="Нашелся дом">Нашёл дом</option>
+        </select>
+    </div>
+     
+    <div>
+        <label class="block mb-1 font-semibold">Описание</label>
+        <textarea asp-for="Description" rows="4" class="w-full border rounded-lg p-2"></textarea>
+    </div>
+     
+    <div>
+        <label class="block mb-1 font-semibold">Ссылка на фото</label>
+        <div class="flex gap-2 items-center">
+            <input asp-for="Images[0]" class="flex-1 border rounded-lg p-2" />
+            @if (Model.Images != null && Model.Images.Any())
+            {
+                <img src="@Model.Images[0]" class="w-12 h-12 object-cover rounded" alt="preview" />
+            }
+        </div>
+    </div> 
+    <div class="flex gap-3">
+        <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-xl hover:bg-blue-600">
+            💾 Сохранить изменения
+        </button>
+        <a href="/Animal/Details/@Model.Id" class="bg-gray-300 text-gray-700 px-6 py-3 rounded-xl hover:bg-gray-400">
+            ❌ Отмена
+        </a>
+    </div>
 
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
