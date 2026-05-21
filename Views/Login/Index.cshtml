@@ -12,9 +12,22 @@
     <title>Вход — Приют для животных</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="m-0 p-0 h-screen overflow-hidden">
+<body class="m-0 p-0 h-screen overflow-hidden flex flex-col">
 
-    <div class="flex h-full">
+    <nav class="bg-[#E5E7EB] px-8 py-3 flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-2">
+            <span class="text-red-500 text-lg">🐾</span>
+            <span class="text-[#C8433B] text-base font-semibold">Спасённый Хвост</span>
+        </div>
+        <div class="flex items-center gap-6 text-sm">
+            <a asp-controller="Home" asp-action="Index" class="text-[#666] hover:text-red-500">Главная</a>
+            <a asp-controller="Animal" asp-action="Index" class="text-[#666] hover:text-red-500">Каталог</a>
+            <a asp-controller="Profile" asp-action="Index" class="text-[#666] hover:text-red-500">Профиль</a>
+            <a asp-controller="Login" asp-action="Index" class="text-red-500 font-semibold">Войти</a>
+        </div>
+    </nav>
+
+    <div class="flex flex-1">
 
         <div class="w-[40%] bg-[#C82626] flex flex-col items-center justify-center relative overflow-hidden">
 
@@ -65,23 +78,9 @@
 
         </div>
 
-        <div class="w-[60%] bg-[#FFF7F3] flex flex-col">
+        <div class="w-[60%] bg-[#FFF7F3] flex items-center justify-center">
 
-            <nav class="bg-white px-8 py-3 flex items-center justify-between border-b border-gray-200">
-                <div class="text-base font-bold text-red-500">
-                    🐾 Спасённый Хвост
-                </div>
-                <div class="space-x-5 text-sm">
-                    <a asp-controller="Home" asp-action="Index" class="text-gray-700 hover:text-red-500">Главная</a>
-                    <a asp-controller="Animal" asp-action="Index" class="text-gray-700 hover:text-red-500">Каталог</a>
-                    <a asp-controller="Profile" asp-action="Index" class="text-gray-700 hover:text-red-500">Профиль</a>
-                    <a asp-controller="Login" asp-action="Index" class="text-red-500 font-semibold">Войти</a>
-                </div>
-            </nav>
-
-            <div class="flex-1 flex items-center justify-center px-12">
-
-                <div class="w-full max-w-sm">
+            <div class="w-full max-w-sm px-12">
 
                     <h1 class="text-[26px] font-bold text-[#2D2D2D] mb-2">Вход</h1>
                     <p class="text-[#8C8C8C] text-base mb-8">Войдите в свой аккаунт</p>
@@ -115,8 +114,6 @@
                 </div>
 
             </div>
-
-        </div>
 
     </div>
 
