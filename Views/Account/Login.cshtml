@@ -5,8 +5,7 @@
 }
 
 <div class="min-h-screen flex">
-
-    <!-- Левая часть -->
+     
     <div class="w-1/2 bg-red-500 flex flex-col items-center text-white p-10">
 
         <h1 class="text-4xl font-black text-center mb-10 tracking-tight leading-tight">
@@ -18,8 +17,7 @@
              class="w-80 mt-40" />
 
     </div>
-
-    <!-- Правая часть -->
+     
     <div class="w-1/2 bg-gray-100 flex justify-center items-center">
 
         <div class="w-full max-w-md">
@@ -27,28 +25,26 @@
             <h2 class="text-4xl font-bold mb-8 text-center">
                 Вход
             </h2>
-
-            <form class="space-y-5">
+             
+            <form method="post" asp-action="Login" class="space-y-5">
+                 
+                <div asp-validation-summary="All" class="text-red-500 text-sm"></div>
 
                 <div>
                     <label class="block mb-2">Логин</label>
-
-                    <input asp-for="Login"
-                           class="w-full border rounded-xl p-3" />
+                    <input asp-for="Login" class="w-full border rounded-xl p-3" />
+                    <span asp-validation-for="Login" class="text-red-500 text-sm"></span>
                 </div>
 
                 <div>
                     <label class="block mb-2">Пароль</label>
-
-                    <input asp-for="Password"
-                           type="password"
-                           class="w-full border rounded-xl p-3" />
+                    <input asp-for="Password" type="password" class="w-full border rounded-xl p-3" />
+                    <span asp-validation-for="Password" class="text-red-500 text-sm"></span>
                 </div>
 
-                <button class="w-full bg-red-500 text-white py-3 rounded-xl text-xl">
+                <button type="submit" class="w-full bg-red-500 text-white py-3 rounded-xl text-xl">
                     Войти
                 </button>
-
             </form>
 
             <p class="text-center mt-6">
@@ -64,4 +60,8 @@
 
     </div>
 
-</div>
+</div> 
+    
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

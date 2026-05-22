@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShelterSiteNET.Models;
-using System.Linq;
-using ShelterSiteNET.Models;
+using System.Linq; 
 using ShelterSiteASP.Data;
 
 namespace ShelterSiteNET.Controllers
@@ -63,10 +62,17 @@ namespace ShelterSiteNET.Controllers
             return View(animal);
         }
 
+        [HttpPost]
         public IActionResult Delete(int id)
         {
-            _animalRepo.Delete(id);
+            var animal = _animalRepo.GetById(id);
+
+            if (animal == null)
+                return NotFound();
+
+            _animalRepo.Delete(id); 
             return RedirectToAction("Index");
-        } 
+        }
+
     }
 }

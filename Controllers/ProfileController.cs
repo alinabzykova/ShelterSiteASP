@@ -15,16 +15,23 @@ namespace ShelterSiteNET.Controllers
             _animalRepo = animalRepo;
             _favoriteRepo = favoriteRepo;
         }
-
-        public IActionResult Index(int userId = 1)  
+        
+        public IActionResult Index()  
         {
-            var user = _userRepo.GetById(userId);
-            if (user == null)
-            { 
-                user = new User { Login = "Гость", Description = "Добро пожаловать!" };
+            var userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Account");
+
             }
 
-            var favorites = _favoriteRepo.GetByUserId(userId);
+            var user = _userRepo.GetById(userId.Value);
+
+            if (user == null)
+                return RedirectToAction("Login", "Account");
+
+            var favorites = _favoriteRepo.GetByUserId(userId.Value);
             var favoriteAnimals = new List<Animal>();
             
             foreach (var fav in favorites)
@@ -44,17 +51,25 @@ namespace ShelterSiteNET.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddToFavorites(int userId, int animalId)
+        public IActionResult AddToFavorites(int animalId)
         {
-            _favoriteRepo.Add(userId, animalId);
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+                return RedirectToAction("Login", "Account");
+
+            _favoriteRepo.Add(userId.Value, animalId);
             return RedirectToAction("Details", "Animal", new { id = animalId });
         }
 
         [HttpPost]
-        public IActionResult RemoveFromFavorites(int userId, int animalId)
+        public IActionResult RemoveFromFavorites(int animalId)
         {
-            _favoriteRepo.Remove(userId, animalId);
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+                return RedirectToAction("Login", "Account");
+
+            _favoriteRepo.Remove(userId.Value, animalId);
             return RedirectToAction("Index");
-        } 
+        }
     }
 }

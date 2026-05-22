@@ -50,9 +50,12 @@
             </p>
 
             <div>
-                <button class="bg-red-500 text-white px-6 py-3 rounded-xl hover:bg-red-600">
-                    ❤️ Добавить в избранное
-                </button>
+                <form method="post" asp-controller="Profile" asp-action="AddToFavorites" style="display:inline;">
+                    <input type="hidden" name="animalId" value="@Model.Id" />
+                    <button type="submit" class="bg-red-500 text-white px-6 py-3 rounded-xl hover:bg-red-600">
+                        ❤️ Добавить в избранное
+                    </button>
+                </form>
 
                 <a href="/Animal/Edit/@Model.Id"
                    class="bg-gray-500 text-white px-6 py-3 rounded-xl ml-2 hover:bg-gray-600 inline-block">

@@ -16,7 +16,23 @@ namespace ShelterSiteASP.Data
                 users = JsonSerializer.Deserialize<List<User>>(jsonString) ?? new List<User>();
             }
         }
+        public User? ValidateUser(string login, string password)
+        {
+            var users = GetAll();
+            return users.FirstOrDefault(u => u.Login == login && u.Password == password);
+        }
 
+        public bool UserExists(string login)
+        {
+            return GetAll().Any(u => u.Login == login);
+        }
+        public void AddUser(User user)
+        {
+            var users = GetAll();
+            user.Id = users.Any() ? users.Max(u => u.Id) + 1 : 1;
+            users.Add(user);
+            SaveChanges();
+        }
         public List<User> GetAll()
         {
             return users;
@@ -30,14 +46,7 @@ namespace ShelterSiteASP.Data
         public User? GetByLogin(string login)
         {
             return users.FirstOrDefault(u => u.Login == login);
-        }
-
-        public void Add(User user)
-        {
-            user.Id = users.Any() ? users.Max(u => u.Id) + 1 : 1;
-            users.Add(user);
-            SaveChanges();
-        }
+        } 
 
         public void Update(User user)
         {
