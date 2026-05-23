@@ -93,5 +93,25 @@ namespace ShelterSiteNET.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public IActionResult UpdateDescription(string description)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+                return RedirectToAction("Login", "Account");
+
+            var user = _userRepo.GetById(userId.Value);
+
+            if (user == null)
+                return RedirectToAction("Login", "Account");
+
+            user.Description = description.Trim();
+
+            _userRepo.Update(user);
+
+            return RedirectToAction("Index");
+        }
     }
 }

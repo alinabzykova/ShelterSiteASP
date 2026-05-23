@@ -1,108 +1,164 @@
 ﻿@using ShelterSiteNET.Models
 @model UserProfileViewModel
+
 @{
     ViewData["Title"] = "Профиль пользователя";
 }
 
-<div class="min-h-screen bg-cover bg-center p-10" style="background-image: url('/images/shelterbg.png')">
+<div class="min-h-screen w-screen bg-cover bg-center bg-fixed py-10 px-4"
+     style="background-image: url('/images/shelterbg.png');
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);">
 
-    <div class="profile-itself max-w-[1200px] mx-auto rounded-[40px]">
-         
-        <div class="avatar bg-red-900 rounded-full justify-self-center self-center">
-            <img src="/images/paw.png" alt="Аватар">
-        </div>
-         
-        <div class="name rounded-[40px] p-2 flex flex-col justify-center">
-            <div class="text-center lg:text-left">
-                <h1 class="text-4xl lg:text-8xl font-bold text-white">
+    <div class="max-w-7xl mx-auto bg-white/10 backdrop-blur-md rounded-[40px] p-6 shadow-2xl">
+
+        <div class="flex flex-col lg:flex-row items-center gap-8 mb-10">
+
+            <div class="flex-1 text-center lg:text-left">
+
+                <h1 class="text-5xl lg:text-4xl font-bold text-white drop-shadow-lg">
                     @Model.User.Login
                 </h1>
-                <h2 class="text-xl lg:text-2xl text-white mt-6 font-semibold">
-                    ИЗБРАННОЕ
-                </h2>
-            </div>
-        </div>
-         
-        <div class="info rounded-[40px]">
-             
-            <div class="description bg-white rounded-[40px] p-5 min-h-[300px]">
-                <p>@Model.User.Description</p>
-            </div>
-             
-            <div class="flex flex-col gap-4">
 
-                @if (!Model.FavoriteAnimals.Any())
-                {
-                    <div class="bg-white rounded-[40px] p-5 text-center text-gray-400">
-                        Нет избранных животных 😢
-                        <a asp-controller="Animal" asp-action="Index" class="block text-red-500 mt-2">
-                            Перейти в каталог →
-                        </a>
-                    </div>
-                }
-                else
-                {
-                    @foreach (var animal in Model.FavoriteAnimals)
+                <div class="flex flex-wrap gap-4 mt-6 justify-center lg:justify-start">
+
+                    <a asp-controller="Account"
+                       asp-action="Logout"
+                       class="bg-white text-gray-700 px-6 py-3 rounded-2xl font-semibold shadow hover:shadow-lg hover:bg-[#DE2E2E] hover:text-white transition-all duration-300">
+
+                        Выйти
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <div class="bg-white rounded-[35px] p-6 shadow-lg lg:col-span-1">
+
+                <h2 class="text-2xl font-bold mb-4 text-gray-800">
+                    О пользователе
+                </h2>
+
+                <form method="post"
+                      asp-controller="Profile"
+                      asp-action="UpdateDescription">
+
+                    <textarea name="description"
+                              class="w-full border rounded-2xl p-4 min-h-[180px] resize-none focus:outline-none focus:ring-2 focus:ring-red-400">@Model.User.Description
+                    </textarea>
+
+                    <button type="submit"
+                            class="mt-4 bg-red-500 text-white px-5 py-3 rounded-2xl hover:bg-red-600 transition">
+
+                        💾 Сохранить описание
+
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <div class="lg:col-span-2">
+
+                <div class="bg-white rounded-[35px] p-6 shadow-lg">
+
+                    <h2 class="text-3xl font-bold mb-6 text-gray-800">
+                        ❤️ Избранные животные
+                    </h2>
+
+                    @if (!Model.FavoriteAnimals.Any())
                     {
-                        <div class="bg-white rounded-[40px] p-5 hover:bg-gray-50 transition cursor-pointer"
-                             onclick="location.href='@Url.Action("Details", "Animals", new { id = animal.Id })'">
-                            <div class="flex items-center gap-4">
-                                <img src="@(animal.Images.Any() ? animal.Images[0] : "/images/paw.png")"
-                                     class="w-12 h-12 rounded-full object-cover"
-                                     alt="@animal.Name">
-                                <div>
-                                    <h3 class="font-bold text-lg">@animal.Name</h3>
-                                    <p class="text-gray-500 text-sm">
-                                        @GetAgeText(animal.Age) · @animal.Size
-                                    </p>
-                                </div>
+                        <div class="text-center py-16">
+
+                            <div class="text-7xl mb-4">
+                                🐶
                             </div>
+
+                            <p class="text-gray-500 text-xl">
+                                Пока нет избранных животных
+                            </p>
+
+                            <a asp-controller="Animal"
+                               asp-action="Index"
+                               class="inline-block mt-6 bg-red-500 text-white px-6 py-3 rounded-2xl hover:bg-red-600 transition">
+
+                                Перейти в каталог
+
+                            </a>
+
                         </div>
                     }
-                }
+                    else
+                    {
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                            @foreach (var animal in Model.FavoriteAnimals)
+                            {
+                                <div class="bg-gray-50 rounded-3xl p-4 hover:shadow-xl hover:scale-[1.02] transition duration-300">
+
+                                    <a asp-controller="Animal"
+                                       asp-action="Details"
+                                       asp-route-id="@animal.Id">
+
+                                        <div class="flex items-center gap-4">
+
+                                            <img src="@(animal.Images.Any() ? animal.Images[0] : "/images/paw.png")"
+                                                 class="w-24 h-24 rounded-2xl object-cover"
+                                                 alt="@animal.Name">
+
+                                            <div>
+
+                                                <h3 class="text-2xl font-bold text-gray-800">
+                                                    @animal.Name
+                                                </h3>
+
+                                                <p class="text-gray-500 mt-1">
+                                                    @GetAgeText(animal.Age)
+                                                </p>
+
+                                                <p class="text-red-500 font-semibold mt-2">
+                                                    @animal.Size
+                                                </p>
+
+                                            </div>
+
+                                        </div>
+
+                                    </a>
+
+                                </div>
+                            }
+
+                        </div>
+                    }
+
+                </div>
 
             </div>
+
         </div>
 
     </div>
+
 </div>
 
 @functions {
+
     string GetAgeText(int age)
     {
-        if (age == 1) return age + " год";
-        if (age >= 2 && age <= 4) return age + " года";
+        if (age == 1)
+            return age + " год";
+
+        if (age >= 2 && age <= 4)
+            return age + " года";
+
         return age + " лет";
     }
+
 }
-
-<style>
-    .profile-itself {
-        display: grid;
-        grid-gap: 10px;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto;
-        padding: 10px;
-    }
-
-    .info {
-        display: grid;
-        grid-gap: 10px;
-        grid-template-columns: 1fr 1fr;
-        grid-column: span 2;
-    }
-
-    .avatar {
-        width: 150px;
-        height: 150px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-        .avatar img {
-            width: 80%;
-            height: 80%;
-            object-fit: contain;
-        }
-</style>
