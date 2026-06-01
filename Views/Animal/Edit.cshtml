@@ -1,4 +1,5 @@
-﻿@model ShelterSiteNET.Models.Animal
+﻿
+@model ShelterSiteNET.Models.Animal
 
 @{
     ViewData["Title"] = "Редактирование животного";
@@ -85,9 +86,15 @@
         <a href="/Animal/Details/@Model.Id" class="bg-gray-300 text-gray-700 px-6 py-3 rounded-xl hover:bg-gray-400">
              Отмена
         </a>
+        <button type="button"
+                onclick="document.getElementById('deleteForm').submit();"
+                class="bg-red-500 text-white px-6 py-3 rounded-xl hover:bg-red-600">
+            🗑️ Удалить
+        </button>
     </div>
 
 </form>
+<form id="deleteForm" asp-action="Delete" asp-route-id="@Model.Id" method="post" style="display:none;"></form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

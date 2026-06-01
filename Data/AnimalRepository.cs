@@ -26,7 +26,7 @@ namespace ShelterSiteASP.Data
 
         public void Add(Animal animal)
         {
-            animal.Id = animals.Max(a => a.Id) + 1;
+            animal.Id = animals.Any() ? animals.Max(a => a.Id) + 1 : 1;
             animals.Add(animal);
             SaveChanges();
         }
@@ -61,7 +61,12 @@ namespace ShelterSiteASP.Data
 
         private void SaveChanges()
         {
-            string jsonString = JsonSerializer.Serialize(animals);
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+
+            string jsonString = JsonSerializer.Serialize(animals, options);
             File.WriteAllText("Data/animals.json", jsonString);
         }
     }

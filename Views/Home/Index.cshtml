@@ -2,57 +2,172 @@
     ViewData["Title"] = "Главная";
 }
 
-<div class="bg-red-500 rounded-3xl p-10 flex items-center justify-between text-white">
+<div class="min-h-screen">
 
-    <div class="max-w-lg">
-        <h1 class="text-4xl font-bold mb-4">
-            Найди своего друга
-        </h1>
+    <section class="bg-red-500 rounded-[40px] p-10 lg:p-20 overflow-hidden relative">
 
-        <p class="mb-6 text-lg">
-            Помоги животным из приюта найти любящую семью
-        </p>
+        <div class="flex flex-col lg:flex-row gap-10 relative z-10">
 
-        <a href="/Animal"
-           class="bg-white text-black px-6 py-3 rounded-xl font-semibold">
-            Смотреть каталог
-        </a>
-    </div>
+            <!-- Левая часть с текстом -->
+            <div class="flex-1">
+                <h1 class="text-5xl lg:text-7xl font-bold text-white leading-tight">
+                    Спасённый хвост 🐾
+                </h1>
+                <p class="text-xl text-red-100 mt-6 leading-relaxed">
+                    Мы помогаем бездомным животным найти
+                    любящую семью и настоящий дом.
+                </p>
+                <div class="flex gap-6 mt-8">
+                    <div>
+                        <div class="text-3xl font-bold text-white">150+</div>
+                        <div class="text-red-200 text-sm">животных спасено</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white">50+</div>
+                        <div class="text-red-200 text-sm">нашли дом</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white">30+</div>
+                        <div class="text-red-200 text-sm">волонтёров</div>
+                    </div>
+                </div>
+                <div class="mt-8 flex gap-4">
+                    <a asp-controller="Animal"
+                       asp-action="Index"
+                       class="bg-red-800 hover:bg-red-900 text-white px-8 py-4 rounded-2xl text-lg transition">
+                        Смотреть животных
+                    </a>
+                    <a asp-controller="Account"
+                       asp-action="Register"
+                       class="bg-white hover:bg-red-100 text-red-600 px-8 py-4 rounded-2xl text-lg transition">
+                        Зарегистрироваться
+                    </a>
+                </div>
+            </div>
 
-    <img src="/images/dog.png"
-         class="w-80"
-         alt="Собака" />
-</div>
+            <div class="flex-1">
+                <img src="/images/dog.png"
+                     class="w-full object-contain relative top-20 lg:top-42 xl:top-18"
+                     alt="Собака">
+            </div>
 
+        </div>
 
-<div class="mt-10 grid grid-cols-2 gap-6">
+    </section>
 
-    <div class="bg-red-700 text-white p-6 rounded-2xl">
-        <h2 class="text-2xl font-bold mb-2">О приюте</h2>
-        <p>
-            Наш приют помогает бездомным собакам найти любящих хозяев.
-            Мы заботимся о животных и ищем для них новый дом.
-        </p>
-    </div>
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
 
-    <div>
-        <h2 class="text-xl font-semibold mb-4">
-            Почему нужно взять животное из приюта?
+        <div class="bg-white rounded-[30px] p-8 shadow">
+
+            <div class="text-5xl mb-4">🏠</div>
+
+            <h2 class="text-2xl font-bold mb-3">
+                Новый дом
+            </h2>
+
+            <p class="text-gray-600">
+                Помогаем животным найти заботливых хозяев.
+            </p>
+
+        </div>
+
+        <div class="bg-white rounded-[30px] p-8 shadow">
+
+            <div class="text-5xl mb-4">❤️</div>
+
+            <h2 class="text-2xl font-bold mb-3">
+                Забота
+            </h2>
+
+            <p class="text-gray-600">
+                Все животные получают помощь и уход.
+            </p>
+
+        </div>
+
+        <div class="bg-white rounded-[30px] p-8 shadow">
+
+            <div class="text-5xl mb-4">🐶</div>
+
+            <h2 class="text-2xl font-bold mb-3">
+                Друзья
+            </h2>
+
+            <p class="text-gray-600">
+                У каждого питомца своя история и характер.
+            </p>
+
+        </div>
+
+    </section>
+
+    <section class="mt-16">
+
+        <h2 class="text-4xl font-bold text-center mb-10">
+            Наши питомцы
         </h2>
 
-        <div class="space-y-2">
-            <div class="bg-gray-200 rounded-full px-4 py-2">
-                спасаете жизнь животного
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <div class="bg-white rounded-[30px] shadow overflow-hidden">
+
+                <img src="/images/dogs/Бобик 1.jpg"
+                     class="w-full h-64 object-cover">
+
+                <div class="p-6">
+
+                    <h3 class="text-2xl font-bold">
+                        Бобик
+                    </h3>
+
+                    <p class="text-gray-500 mt-2">
+                        Добрый и весёлый лабрадор.
+                    </p>
+
+                </div>
+
             </div>
 
-            <div class="bg-gray-200 rounded-full px-4 py-2">
-                получаете верного друга
+            <div class="bg-white rounded-[30px] shadow overflow-hidden">
+
+                <img src="/images/dogs/Тузик 1.jpg"
+                     class="w-full h-64 object-cover">
+
+                <div class="p-6">
+
+                    <h3 class="text-2xl font-bold">
+                        Тузик
+                    </h3>
+
+                    <p class="text-gray-500 mt-2">
+                        Активный и дружелюбный корги.
+                    </p>
+
+                </div>
+
             </div>
 
-            <div class="bg-gray-200 rounded-full px-4 py-2">
-                помогаете приюту
+            <div class="bg-white rounded-[30px] shadow overflow-hidden">
+
+                <img src="/images/dogs/Лайка 1.jpg"
+                     class="w-full h-64 object-cover">
+
+                <div class="p-6">
+
+                    <h3 class="text-2xl font-bold">
+                        Лайка
+                    </h3>
+
+                    <p class="text-gray-500 mt-2">
+                        Спокойная и умная овчарка.
+                    </p>
+
+                </div>
+
             </div>
+
         </div>
-    </div>
+
+    </section>
 
 </div>

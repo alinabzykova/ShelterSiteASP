@@ -1,17 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShelterSiteNET.Models;
-using System.Linq;
-using ShelterSiteNET.Models;
+using System.Linq; 
 using ShelterSiteASP.Data;
 
 namespace ShelterSiteNET.Controllers
 {
     public class AnimalController : Controller
     {   private readonly AnimalRepository _animalRepo;
+        private readonly FavoriteRepository _favoriteRepo;
 
-        public AnimalController(AnimalRepository animalRepo)
+        public AnimalController(
+            AnimalRepository animalRepo,
+            FavoriteRepository favoriteRepo)
         {
             _animalRepo = animalRepo;
+            _favoriteRepo = favoriteRepo;
         }
 
         public IActionResult Index()
@@ -23,8 +26,22 @@ namespace ShelterSiteNET.Controllers
         public IActionResult Details(int id)
         {
             var animal = _animalRepo.GetById(id);
+
             if (animal == null)
                 return NotFound();
+
+            var userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId != null)
+            {
+                ViewBag.IsFavorite =
+                    _favoriteRepo.IsFavorite(userId.Value, id);
+            }
+            else
+            {
+                ViewBag.IsFavorite = false;
+            }
+
             return View(animal);
         }
 
@@ -63,10 +80,17 @@ namespace ShelterSiteNET.Controllers
             return View(animal);
         }
 
+        [HttpPost]
         public IActionResult Delete(int id)
         {
-            _animalRepo.Delete(id);
+            var animal = _animalRepo.GetById(id);
+
+            if (animal == null)
+                return NotFound();
+
+            _animalRepo.Delete(id); 
             return RedirectToAction("Index");
-        } 
+        }
+
     }
 }
