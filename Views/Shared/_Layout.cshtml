@@ -10,20 +10,17 @@
 
 <body class="bg-gray-100">
 
-    <nav class="bg-gray-200 rounded-3xl m-4 p-6 flex justify-between items-center">
-
-        <div class="text-2xl font-bold text-red-500">
-            🐾 Спасённый Хвост
+    <nav class="bg-[#E5E7EB] px-8 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <span class="text-red-500 text-lg">🐾</span>
+            <span class="text-[#C8433B] text-base font-semibold">Спасённый Хвост</span>
         </div>
-
-        <div class="space-x-6 text-lg">
-            <a asp-controller="Home" asp-action="Index" class="hover:text-red-500">Главная</a>
-            <a asp-controller="Animal" asp-action="Index" class="hover:text-red-500">Каталог</a>
-            <a asp-controller="Profile" asp-action="Index" class="hover:text-red-500">Профиль</a>
-            <a asp-controller="Account" asp-action="Login" class="hover:text-red-500">Войти</a>
-            <a asp-controller="Home" asp-action="About" class="hover:text-red-500">О разработчике</a>
+        <div class="flex items-center gap-6 text-sm">
+            <a asp-controller="Home" asp-action="Index" class="text-[#666] hover:text-red-500">Главная</a>
+            <a asp-controller="Animal" asp-action="Index" class="text-[#666] hover:text-red-500">Каталог</a>
+            <a asp-controller="Profile" asp-action="Index" class="text-[#666] hover:text-red-500">Профиль</a>
+            <a asp-controller="Login" asp-action="Index" class="text-[#666] hover:text-red-500">Войти</a>
         </div>
-
     </nav>
 
     <div class="container mx-auto p-4">
