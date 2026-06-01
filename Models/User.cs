@@ -16,9 +16,7 @@ namespace ShelterSiteNET.Models
         public string Password { get; set; } = "";
 
         [StringLength(200)]
-        public string? Description { get; set; } = "Любитель животных ";
-        /* 
-        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
-        public string? ConfirmPassword { get; set; }*/
+        public string? Description { get; set; } = "Любитель животных "; 
+        public string Role { get; set; } = "User";
     }
 }

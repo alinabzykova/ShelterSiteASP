@@ -30,7 +30,7 @@ namespace ShelterSiteNET.Controllers
                 { 
                     HttpContext.Session.SetInt32("UserId", user.Id);
                     HttpContext.Session.SetString("UserLogin", user.Login);
-
+                    HttpContext.Session.SetString("UserRole", user.Role);
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -71,7 +71,8 @@ namespace ShelterSiteNET.Controllers
                 {
                     Login = Login,
                     Password = Password,
-                    Description = "Любитель животных"
+                    Description = "Любитель животных",
+                    Role = "User"
                 };
 
                 _userRepo.AddUser(user);

@@ -75,5 +75,11 @@ namespace ShelterSiteASP.Data
             string jsonString = JsonSerializer.Serialize(users);
             File.WriteAllText("Data/users.json", jsonString);
         }
+         
+        public bool IsAdmin(int userId)
+        {
+            var user = GetById(userId);
+            return user != null && user.Role == "Admin";
+        }
     }
 }

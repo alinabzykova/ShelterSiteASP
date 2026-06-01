@@ -80,10 +80,22 @@
 
                 </form>
 
-                <a href="/Animal/Edit/@Model.Id"
-                   class="bg-gray-500 text-white px-6 py-3 rounded-xl ml-2 hover:bg-gray-600 inline-block">
-                    ✏️ Редактировать
-                </a>
+
+
+                @{
+                    var isAdmin = Context.Session.GetString("UserRole") == "Admin";
+                }
+                 
+                @if (isAdmin)
+                {
+                    <a href="/Animal/Edit/@Model.Id" class="bg-gray-500 text-white px-6 py-3 rounded-xl ml-2 hover:bg-gray-600 inline-block">
+                        ✏️ Редактировать
+                    </a>
+                }
+
+
+
+
             </div>
         </div>
 

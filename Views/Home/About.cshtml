@@ -28,14 +28,38 @@
         <li>GitHub</li>
     </ul>
 
-    <h2 class="text-2xl font-semibold mt-8 mb-4">
-        Команда проекта
-    </h2>
+    <div class="flex justify-between items-center">
+        <div>
+            <h2 class="text-2xl font-semibold mt-8 mb-4">Команда проекта</h2>
+            <ul class="text-lg space-y-2">
+                <li>Алина</li>
+                <li>Амина</li>
+                <li>Сармат</li>
+            </ul>
+        </div>
+        <div class="game cursor-pointer" onclick="clickGame()">
+            <p>Кликов: <span id="clicks">0</span></p>
 
-    <ul class="text-lg space-y-2">
-        <li>Алина Бзыкова</li>
-        <li>Амина Гатагова</li>
-        <li>Сармат Макиев</li>
-    </ul>
+            <img src="/images/about.png" class="w-48 rounded-2xl" />
+        </div>
+    
+    </div> 
+    </div>
 
-</div>
+    @section Scripts {
+        <script>
+            let clicks = 0;
+            function clickGame() {
+                clicks++;
+                document.getElementById('clicks').innerText = clicks;
+                if (clicks === 10) {
+                    alert("Вы только что поиграли...");
+                }
+
+           else if (clicks === 30) {
+                alert("1 клик = +1 балл. Благодарим за максимальный балл!");
+            }
+            }
+        </script>
+    } 
+ 

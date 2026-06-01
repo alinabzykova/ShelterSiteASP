@@ -8,13 +8,24 @@ namespace ShelterSiteNET.Controllers
     public class AnimalController : Controller
     {   private readonly AnimalRepository _animalRepo;
         private readonly FavoriteRepository _favoriteRepo;
+        private readonly UserRepository _userRepo;
 
         public AnimalController(
             AnimalRepository animalRepo,
-            FavoriteRepository favoriteRepo)
+            FavoriteRepository favoriteRepo,
+            UserRepository userRepo)
         {
             _animalRepo = animalRepo;
             _favoriteRepo = favoriteRepo;
+            _userRepo = userRepo;
+        }
+
+        private bool IsAdmin()
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null) return false;
+             
+            return _userRepo.IsAdmin(userId.Value);
         }
 
         public IActionResult Index()
@@ -47,12 +58,14 @@ namespace ShelterSiteNET.Controllers
 
         public IActionResult Create()
         {
+            if (!IsAdmin()) return RedirectToAction("Login", "Account");
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(Animal animal)
         {
+            if (!IsAdmin()) return RedirectToAction("Login", "Account");
             if (ModelState.IsValid)
             {
                 _animalRepo.Add(animal);
@@ -63,6 +76,8 @@ namespace ShelterSiteNET.Controllers
 
         public IActionResult Edit(int id)
         {
+            if (!IsAdmin()) return RedirectToAction("Login", "Account");
+
             var animal = _animalRepo.GetById(id);
             if (animal == null)
                 return NotFound();
@@ -72,6 +87,7 @@ namespace ShelterSiteNET.Controllers
         [HttpPost]
         public IActionResult Edit(Animal animal)
         {
+            if (!IsAdmin()) return RedirectToAction("Login", "Account");
             if (ModelState.IsValid)
             {
                 _animalRepo.Update(animal);
@@ -83,6 +99,7 @@ namespace ShelterSiteNET.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
+            if (!IsAdmin()) return RedirectToAction("Login", "Account");
             var animal = _animalRepo.GetById(id);
 
             if (animal == null)
@@ -90,7 +107,6 @@ namespace ShelterSiteNET.Controllers
 
             _animalRepo.Delete(id); 
             return RedirectToAction("Index");
-        }
-
+        } 
     }
 }
