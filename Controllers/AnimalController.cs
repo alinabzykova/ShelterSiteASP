@@ -59,7 +59,9 @@ namespace ShelterSiteNET.Controllers
         public IActionResult Create()
         {
             if (!IsAdmin()) return RedirectToAction("Login", "Account");
-            return View();
+
+            var animal = new Animal();
+            return View(animal);
         }
 
         [HttpPost]

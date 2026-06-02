@@ -27,12 +27,12 @@ namespace ShelterSiteNET.Models
 
         public string Size { get; set; } = "Средний";
 
-        public string Status { get; set; } = "Доступен"; //может булевый оператор подойдет?
+        public string Status { get; set; } = "Доступен";  
 
         public string Description { get; set; } =
             "Питомец ищет друга!";
 
-        public List<string> Images { get; set; } = new List<string>();
+        public List<string> Images { get; set; } = new List<string> {"/images/default.png" };
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
