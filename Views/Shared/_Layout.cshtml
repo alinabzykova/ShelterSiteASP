@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="utf-8" />
@@ -17,11 +18,43 @@
         </div>
 
         <div class="space-x-6 text-lg">
-            <a asp-controller="Home" asp-action="Index" class="hover:text-red-500">Главная</a>
-            <a asp-controller="Animal" asp-action="Index" class="hover:text-red-500">Каталог</a>
-            <a asp-controller="Profile" asp-action="Index" class="hover:text-red-500">Профиль</a>
-            <a asp-controller="Account" asp-action="Login" class="hover:text-red-500">Войти</a>
-            <a asp-controller="Home" asp-action="About" class="hover:text-red-500">О разработчике</a>
+
+            <a asp-controller="Home"
+               asp-action="Index"
+               class="hover:text-red-500">
+                Главная
+            </a>
+
+            <a asp-controller="Animal"
+               asp-action="Index"
+               class="hover:text-red-500">
+                Каталог
+            </a>
+
+            @if (Context.Session.GetInt32("UserId") != null)
+            {
+                <a asp-controller="Profile"
+                   asp-action="Index"
+                   class="hover:text-red-500">
+                    Профиль
+                </a>
+            }
+
+            @if (Context.Session.GetInt32("UserId") == null)
+            {
+                <a asp-controller="Account"
+                   asp-action="Login"
+                   class="hover:text-red-500">
+                    Войти
+                </a>
+            }
+
+            <a asp-controller="Home"
+               asp-action="About"
+               class="hover:text-red-500">
+                О разработчике
+            </a>
+
         </div>
 
     </nav>
