@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Помочь приюту";
+}
+
+<div class="max-w-2xl mx-auto bg-white rounded-3xl shadow-lg p-8 mt-10">
+
+    <h1 class="text-4xl font-bold text-center text-red-600 mb-6">
+        ❤️ Помочь приюту
+    </h1>
+
+    <p class="text-center text-gray-600 mb-8">
+        Ваше пожертвование помогает нам кормить, лечить и содержать животных.
+    </p>
+
+    @if (ViewBag.Success == true)
+    {
+        <div class="bg-green-100 text-green-700 p-4 rounded-xl mb-6">
+            Спасибо, @ViewBag.Name! ❤️
+
+            Вы пожертвовали @ViewBag.Amount ₽.
+        </div>
+    }
+
+    <form method="post">
+
+        <div class="mb-4">
+            <label class="block mb-2 font-semibold">
+                Ваше имя
+            </label>
+
+            <input type="text"
+                   name="donorName"
+                   class="w-full border rounded-xl p-3"
+                   required />
+        </div>
+
+        <div class="mb-6">
+            <label class="block mb-2 font-semibold">
+                Сумма пожертвования
+            </label>
+
+            <input type="number"
+                   name="amount"
+                   min="1"
+                   class="w-full border rounded-xl p-3"
+                   required />
+        </div>
+
+        <button type="submit"
+                class="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-xl">
+
+            ❤️ Пожертвовать
+
+        </button>
+
+    </form>
+
+</div>
