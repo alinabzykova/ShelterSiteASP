@@ -18,6 +18,41 @@
             </a>
         </div>
     }
+
+<form method="get"
+      class="bg-white rounded-2xl shadow p-4 mb-6 flex flex-wrap gap-4">
+
+    <select name="gender" class="border rounded-lg p-2">
+        <option value="">Любой пол</option>
+        <option value="Мальчик" selected="@(ViewBag.Gender == "Мальчик")">Мальчик</option>
+        <option value="Девочка" selected="@(ViewBag.Gender == "Девочка")">Девочка</option>
+        <option value="Не указан" selected="@(ViewBag.Gender == "Не указан")">Не указан</option>
+    </select>
+
+    <select name="size" class="border rounded-lg p-2">
+        <option value="">Любой размер</option>
+        <option value="Маленький" selected="@(ViewBag.Size == "Маленький")">Маленький</option>
+        <option value="Средний" selected="@(ViewBag.Size == "Средний")">Средний</option>
+        <option value="Большой" selected="@(ViewBag.Size == "Большой")">Большой</option>
+    </select>
+
+    <select name="age" class="border rounded-lg p-2">
+        <option value="">Любой возраст</option>
+        <option value="1" selected="@(ViewBag.Age?.ToString() == "1")">До 1 года</option>
+        <option value="3" selected="@(ViewBag.Age?.ToString() == "3")">До 3 лет</option>
+        <option value="5" selected="@(ViewBag.Age?.ToString() == "5")">До 5 лет</option>
+        <option value="10" selected="@(ViewBag.Age?.ToString() == "10")">До 10 лет</option>
+        <option value="11" selected="@(ViewBag.Age?.ToString() == "11")">От 10 лет</option>
+    </select>
+
+    <button type="submit"
+            class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+
+        Применить
+
+    </button>
+
+</form>
      
 
 <h1 class="text-3xl font-bold mb-8">Каталог животных</h1>

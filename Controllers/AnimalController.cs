@@ -28,9 +28,32 @@ namespace ShelterSiteNET.Controllers
             return _userRepo.IsAdmin(userId.Value);
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string gender, string size, int? age)
         {
             var animals = _animalRepo.GetAll();
+
+            if (!string.IsNullOrEmpty(gender))
+                animals = animals.Where(a => a.Gender == gender).ToList();
+
+            if (!string.IsNullOrEmpty(size))
+                animals = animals.Where(a => a.Size == size).ToList();
+
+            if (age.HasValue)
+            {
+                if (age.Value == 11)
+                {
+                    animals = animals.Where(a => a.Age >= 10).ToList();
+                }
+                else
+                {
+                    animals = animals.Where(a => a.Age <= age.Value).ToList();
+                }
+            }
+
+            ViewBag.Gender = gender;
+            ViewBag.Size = size;
+            ViewBag.Age = age;
+
             return View(animals);
         }
 
