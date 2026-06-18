@@ -21,8 +21,8 @@ namespace ShelterSiteASP.Data
             var users = GetAll();
             return users.FirstOrDefault(u => u.Login == login && u.Password == password);
         }
-
-        public bool UserExists(string login)
+        
+        public bool UserExists(string login) //используется при регистрации
         {
             return GetAll().Any(u => u.Login == login);
         }

@@ -6,7 +6,7 @@ namespace ShelterSiteASP.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<HomeController> _logger; //для записи ошибок и информации
 
     public HomeController(ILogger<HomeController> logger)
     {
@@ -23,7 +23,7 @@ public class HomeController : Controller
         return View();
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)] //запрещает браузеру кэшировать страницу ошибки
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

@@ -36,7 +36,7 @@ namespace ShelterSiteNET.Controllers
 
             var favoriteAnimals = new List<Animal>();
 
-            foreach (var fav in favorites)
+            foreach (var fav in favorites) //поиск животных
             {
                 var animal = _animalRepo.GetById(fav.AnimalId);
 
@@ -81,18 +81,6 @@ namespace ShelterSiteNET.Controllers
                 new { id = animalId });
         }
 
-        [HttpPost]
-        public IActionResult RemoveFromFavorites(int animalId)
-        {
-            var userId = HttpContext.Session.GetInt32("UserId");
-
-            if (userId == null)
-                return RedirectToAction("Login", "Account");
-
-            _favoriteRepo.Remove(userId.Value, animalId);
-
-            return RedirectToAction("Index");
-        }
 
         [HttpPost]
         public IActionResult UpdateDescription(string description)
