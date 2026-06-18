@@ -63,7 +63,8 @@ namespace ShelterSiteASP.Data
         {
             var options = new JsonSerializerOptions
             {
-                WriteIndented = true
+                WriteIndented = true,
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
             };
 
             string jsonString = JsonSerializer.Serialize(animals, options);

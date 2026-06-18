@@ -1,4 +1,5 @@
 ﻿using ShelterSiteNET.Models;
+using System.Text;
 using System.Text.Json;
 
 namespace ShelterSiteASP.Data
@@ -59,6 +60,11 @@ namespace ShelterSiteASP.Data
 
         private void SaveChanges()
         {
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            };
             string jsonString = JsonSerializer.Serialize(favorites);
             File.WriteAllText("Data/favorites.json", jsonString);
         }

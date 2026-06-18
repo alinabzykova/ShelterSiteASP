@@ -72,6 +72,11 @@ namespace ShelterSiteASP.Data
 
         private void SaveChanges()
         {
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            };
             string jsonString = JsonSerializer.Serialize(users);
             File.WriteAllText("Data/users.json", jsonString);
         }

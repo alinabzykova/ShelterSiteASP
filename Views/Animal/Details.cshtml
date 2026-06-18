@@ -77,10 +77,15 @@
 
                         </button>
                     }
-
+                    
                 </form>
 
+                <a asp-action="Index"
+                        class="bg-blue-500 text-white px-6 py-3 rounded-xl hover:bg-blue-700" onclick="Index.cshtml">
 
+                    Назад
+
+                </a>
 
                 @{
                     var isAdmin = Context.Session.GetString("UserRole") == "Admin";
